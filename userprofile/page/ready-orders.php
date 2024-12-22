@@ -9,9 +9,9 @@ $orderClass = new Order($pdo);
 
 // Получаем ID пользователя из сессии
 $user_id = $_SESSION["user"]["id"];
-
+$status = 'Выполнен';
 // Получаем список заказов
-$orders = $orderClass->getOrders($user_id);
+$orders = $orderClass->getOrdersByStatusAndIdUsers($status, $user_id)
 
 ?>
 

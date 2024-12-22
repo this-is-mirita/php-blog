@@ -7,8 +7,8 @@ $pdo = $dbConnection->getConnection();
 $orderClass = new Order($pdo);
 
 $user_id = $_SESSION["user"]["id"];
-
-$orderClass = $orderClass->getOrders($user_id);
+$status = 'назначен';
+$orderClass = $orderClass->getOrdersByStatusAndIdUsers($status, $user_id);
 ?>
 
 <div class="container">

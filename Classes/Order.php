@@ -28,12 +28,12 @@ class Order
         return $stmt->execute();
     }
 
-    public function getOrders($user_id){
-        $sql = "SELECT * FROM order_table WHERE user_id = ? ORDER BY id asc ";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$user_id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+//    public function getOrders($user_id){
+//        $sql = "SELECT * FROM order_table WHERE user_id = ? ORDER BY id asc ";
+//        $stmt = $this->pdo->prepare($sql);
+//        $stmt->execute([$user_id]);
+//        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+//    }
     public function getOrderById($id){
         $sql = "SELECT * FROM order_table WHERE id = ? limit 1";
         $stmt = $this->pdo->prepare($sql);
@@ -60,5 +60,12 @@ class Order
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$status, $id]);
         return $stmt->rowCount(); // Возвращает количество затронутых строк
+    }
+
+    public function getOrdersByStatusAndIdUsers($status, $user_id){
+        $sql = "SELECT * FROM order_table WHERE status = ? AND user_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$status, $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

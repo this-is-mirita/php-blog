@@ -11,7 +11,9 @@ $orderClass = new Order($pdo);
 $user_id = $_SESSION["user"]["id"];
 
 // Получаем список заказов
-$orders = $orderClass->getOrders($user_id);
+
+$status = 'назначен';
+$orders = $orderClass->getOrdersByStatusAndIdUsers($status, $user_id);
 
 // Обрабатываем форму
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['order_id'])) {
