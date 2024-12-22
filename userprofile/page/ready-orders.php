@@ -13,31 +13,10 @@ $user_id = $_SESSION["user"]["id"];
 // Получаем список заказов
 $orders = $orderClass->getOrders($user_id);
 
-// Обрабатываем форму
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['order_id'])) {
-    $status = 'Выполнен';
-    $order_id = $_GET['order_id'];
-
-    // Обновляем статус заказа
-    $orderClass->getEndStatus($order_id, $status);
-
-    // Перенаправление для предотвращения повторной отправки формы
-    header("Location: ../start-user.php");
-    exit();
-}
-
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Layout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
+
 <div class="container">
-    <h1 class="mb-4">Мои заказы</h1>
+    <h1 class="mb-4">Выполненые заказы</h1>
     <div class="row g-4">
         <?php foreach ($orders as $item) : ?>
             <div class="col-6">
@@ -53,11 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_GET['order_id'])) {
                             <strong>Статус:</strong> <?= htmlspecialchars($item['status']) ?><br>
                             <strong>Приоритет:</strong> <?= htmlspecialchars($item['priority']) ?>
                         </p>
-                    </div>
-                    <div class="card-body">
-                        <form action="single-page-orders.php?order_id=<?=$item['id']?>" method="post">
-                            <button>Закрыть заказ</button>
-                        </form>
                     </div>
                 </div>
             </div>

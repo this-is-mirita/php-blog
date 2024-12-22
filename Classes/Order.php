@@ -54,4 +54,11 @@ class Order
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
+
+    public function getEndStatus($id, $status){
+        $sql = "UPDATE order_table SET status = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$status, $id]);
+        return $stmt->rowCount(); // Возвращает количество затронутых строк
+    }
 }

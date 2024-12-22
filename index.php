@@ -12,4 +12,3 @@ require_once __DIR__ . "/templates/start-content.php";
 require_once __DIR__ . "/templates/paginatons.php";
 require_once __DIR__ . "/templates/form-content.php";
 
-// test commit
