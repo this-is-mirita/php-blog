@@ -36,6 +36,9 @@
                         </li>
                     <?php else: ?>
                         <!-- Личный кабинет -->
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/admin/admin-start-page.php">Админ</a>
+                        </li>
                         <li class="dropdown">
                             <a class="btn text-white  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <?= $_SESSION['user']['username'] ?>

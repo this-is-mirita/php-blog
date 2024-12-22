@@ -12,7 +12,7 @@ $user_id = $_SESSION["user"]["id"];
 
 // Получаем список заказов
 
-$status = 'назначен';
+$status = 'Назначен';
 $orders = $orderClass->getOrdersByStatusAndIdUsers($status, $user_id);
 
 // Обрабатываем форму

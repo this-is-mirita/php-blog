@@ -68,4 +68,11 @@ class Order
         $stmt->execute([$status, $user_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAllOrderOnlyStatus($status){
+        $sql = "SELECT * FROM order_table where status = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$status]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
