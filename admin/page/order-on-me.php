@@ -40,8 +40,8 @@ $getAllOrder = $orderClass->getAllOrderOnlyStatus($status);
             <!-- Статус -->
             <div class="col-2">
                 <select class="form-select form-select-sm">
-                    <option value="Выполнен" <?= $order['status'] === "Выполнен" ? 'selected' : ''; ?>>Выполнен</option>
                     <option value="Назначен" <?= $order['status'] === "назначен" ? 'selected' : ''; ?>>Назначен</option>
+                    <option value="Выполнен" <?= $order['status'] === "Выполнен" ? 'selected' : ''; ?>>Выполнен</option>
                 </select>
             </div>
             <!-- Загрузка результата -->

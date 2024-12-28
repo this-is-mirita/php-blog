@@ -32,12 +32,13 @@ $orders = $orderClass->getOrdersByStatusAndIdUsers($status, $user_id)
                             <strong>Статус:</strong> <?= htmlspecialchars($item['status']) ?><br>
                             <strong>Приоритет:</strong> <?= htmlspecialchars($item['priority']) ?>
                         </p>
+                        <a href="page/single-page-orders.php?order_id=<?= $item['id'] ?>" class="text-decoration-none">Проверить</a>
                     </div>
                 </div>
             </div>
             <div class="col-6">
                 <div class="card" style="width: 18rem;">
-                    <img src="/image/<?php echo($item['result_order']); ?>" class="card-img-top" alt="...">
+                    <img src="/uploads/<?php echo($item['result_order']); ?>" class="card-img-top" alt="...">
                 </div>
             </div>
         <?php endforeach; ?>

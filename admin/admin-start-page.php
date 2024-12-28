@@ -1,5 +1,14 @@
 <?php
+session_start();
+// Включение отображения ошибок
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once __DIR__ . '/../DataBase/dBConnetion.php';
 require_once __DIR__ . '/../Classes/UploadFile.php'; // Подключаем класс UploadFile
+require_once __DIR__ . '/../Classes/Order.php';
+
 
 // Проверяем, что запрос выполнен методом POST и что в массиве $_FILES есть ключ 'file'
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
@@ -27,6 +36,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         } else {
             echo "Не удалось сохранить файл"; // Ошибка при перемещении файла
         }
+    }
+    // Создаем подключение к базе данных
+    $dbConnection = new DbConnection();
+    $pdo = $dbConnection->getConnection();
+    $orderClass = new Order($pdo);
+
+    // Получаем ID пользователя из сессии
+    $user_id = $_SESSION["user"]["id"];
+    $status = 'Выполнен';
+    $result_order = $file->fileName();
+    //basename отрезает нахуй всё кроме имя файла
+    $baseFileName = basename($result_order);
+    // Получаем id заказа, например, из сессии или другим способом
+    $id = $_POST['order_id'];
+
+// Обновляем статус и result_order для записи с данным id
+    echo "<pre>";
+    var_dump($status);
+    var_dump($baseFileName);
+    var_dump($id);
+    echo "<pre>";
+    $updated = $orderClass->readyOrder($status, $baseFileName, $id);
+// Проверка успешности обновления
+    if ($updated) {
+        echo "Статус и result_order заказа обновлены успешно.";
+    } else {
+        echo "Ошибка обновления.";
     }
 }
 ?>
@@ -59,11 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
         <!-- Правая колонка -->
         <div class="col-9" id="profile"></div>
-        <?php
-            foreach (UploadFile::list() as $img) {
-                echo "<img src={$img['url']} {$img['wh']}>";
-            }
-        ?>
+<!--        --><?php
+//            foreach (UploadFile::list() as $img) {
+//                echo "<img src={$img['url']} {$img['wh']}>";
+//            }
+//        ?>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
