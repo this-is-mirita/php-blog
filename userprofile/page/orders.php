@@ -34,6 +34,7 @@ $orderClass = $orderClass->getOrdersByStatusAndIdUsers($status,$user_id);
                                     <strong>Статус:</strong> <?= htmlspecialchars($item['status']) ?><br>
                                     <strong>Приоритет:</strong> <?= htmlspecialchars($item['priority']) ?><br>
                                 </p>
+
                                 <?php if ($item['result_order'] == 'в работе'): ?>
                                     <p><strong>Заказ:</strong> <?= $item['result_order'] ?></p>
                                 <?php else: ?>

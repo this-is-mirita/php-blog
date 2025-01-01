@@ -22,6 +22,7 @@ $getAllOrder = $orderClass->getAllOrderOnlyStatus($status);
             <div class="col-3">
                 <?= htmlspecialchars($order['full_name']); ?>
             </div>
+
             <!-- Email -->
             <div class="col-3">
                 <?= htmlspecialchars($order['email']); ?>

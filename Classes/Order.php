@@ -61,6 +61,7 @@ class Order
         $stmt->execute([$status, $user_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function getOrdersIdUsers($user_id){
         $sql = "SELECT * FROM order_table WHERE user_id = ?";
         $stmt = $this->pdo->prepare($sql);
